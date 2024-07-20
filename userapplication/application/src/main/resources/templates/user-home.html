@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Home</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Welcome, <span th:text="${user.name}">User</span>!</h1>
+    <a href="/cart">Cart</a>
+    <a href="/settings">Settings</a>
+    <a href="/orders">View Orders</a>
+    <form th:action="@{/logout}" method="post" style="display:inline;">
+        <button type="submit">Logout</button>
+    </form>
+
+    <form th:action="@{/user/home}" method="get" style="margin-top: 20px;">
+        <input type="text" name="searchTitle" placeholder="Search by title" th:value="${param.searchTitle}" />
+        <button type="submit">Search</button>
+    </form>
+
+    <form th:action="@{/user/home}" method="get" style="margin-top: 20px;">
+        <select name="genreId">
+            <option value="">All Genres</option>
+            <option th:each="genre : ${genres}" th:value="${genre.genreId}" th:text="${genre.name}"></option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+    <form th:action="@{/user/home}" method="get" style="margin-top: 20px;">
+        <select name="sortField">
+            <option value="title">Title</option>
+            <option value="stock">Stock</option>
+        </select>
+        <select name="sortDirection">
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
+        <button type="submit">Sort</button>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Thumbnail</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.title}">Title</td>
+            <td th:text="${book.author}">Author</td>
+            <td th:text="${book.price}">Price</td>
+            <td th:text="${book.stock}">Stock</td>
+            <td><img th:src="${book.thumbnailUrl}" alt="Thumbnail" width="100"/></td>
+            <td>
+                <form th:action="@{/cart/add}" method="post">
+                    <input type="hidden" name="bookId" th:value="${book.bookId}"/>
+                    <button type="submit">Add to Cart</button>
+                </form>
+                <form th:action="@{/view}" method="get">
+                    <input type="hidden" name="bookId" th:value="${book.bookId}"/>
+                    <button type="submit">View</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

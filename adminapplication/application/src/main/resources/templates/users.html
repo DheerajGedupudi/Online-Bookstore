@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Users</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Users</h1>
+    <div class="actions">
+        <a href="/admin/home">Back to Home</a>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</h>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Is Blocked</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.userId}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.address}"></td>
+            <td th:text="${user.phone}"></td>
+            <td th:text="${user.isBlocked}"></td>
+            <td>
+                <a th:if="${user.isBlocked == false}" th:href="@{/admin/users/block/{userId}(userId=${user.userId})}">Block</a>
+                <a th:if="${user.isBlocked == true}" th:href="@{/admin/users/unblock/{userId}(userId=${user.userId})}">Unblock</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

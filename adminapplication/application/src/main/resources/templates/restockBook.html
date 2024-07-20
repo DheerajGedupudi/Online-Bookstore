@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Restock Book</title>
+</head>
+<body>
+<h1>Restock Book</h1>
+<form th:action="@{/admin/books/restock}" th:object="${book}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <label for="stock">Stock</label>
+    <input type="text" id="stock" th:field="*{stock}"/>
+    <button type="submit">Update Stock</button>
+</form>
+<a th:href="@{/admin/books}">Back to Books</a>
+</body>
+</html>

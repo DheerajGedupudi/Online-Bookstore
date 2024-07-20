@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Checkout</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Checkout</h1>
+    <p>Total Amount: <span th:text="${cartTotal}">0.00</span></p>
+
+    <form th:action="@{/checkout/complete}" method="post">
+        <label for="paymentMethod">Mode of Payment:</label>
+        <select name="paymentMethod" id="paymentMethod" required>
+            <option value="Credit Card">Credit Card</option>
+            <option value="Debit Card">Debit Card</option>
+            <option value="PayPal">PayPal</option>
+            <option value="Net Banking">Net Banking</option>
+        </select>
+        <br><br>
+        <button type="submit">Complete Checkout</button>
+    </form>
+    <a href="/user/home">Back to Home</a>
+</div>
+</body>
+</html>

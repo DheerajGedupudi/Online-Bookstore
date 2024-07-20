@@ -1,0 +1,27 @@
+# IntelliJ IDEA specific files
+.idea/
+
+# Maven specific files
+target/
+
+# Logs
+logs/
+
+# Temporary files
+temp/
+
+# IntelliJ IDEA project files
+*.iml
+
+# Maven Wrapper files
+.mvn/wrapper/maven-wrapper.jar
+
+# Node specific files (if any)
+node_modules/
+
+# Environment variables
+.env
+
+# OS specific files
+.DS_Store
+Thumbs.db

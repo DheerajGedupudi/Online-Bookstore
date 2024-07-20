@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cart</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Your Cart</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cartItem : ${cartItems}">
+            <td th:text="${cartItem.book.title}">Title</td>
+            <td>
+                <form th:action="@{/cart/update}" method="post">
+                    <input type="hidden" name="cartItemId" th:value="${cartItem.cartItemId}"/>
+                    <input type="number" name="quantity" th:value="${cartItem.quantity}" min="1"/>
+                    <button type="submit">Update</button>
+                </form>
+            </td>
+            <td th:text="${cartItem.price * cartItem.quantity}">Total Price</td>
+            <td>
+                <form th:action="@{/cart/remove}" method="post">
+                    <input type="hidden" name="cartItemId" th:value="${cartItem.cartItemId}"/>
+                    <button type="submit">Remove</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/user/home">Continue Shopping</a>
+    <form th:action="@{/checkout}" method="get" style="display:inline;">
+        <button type="submit">Checkout</button>
+    </form>
+</div>
+</body>
+</html>

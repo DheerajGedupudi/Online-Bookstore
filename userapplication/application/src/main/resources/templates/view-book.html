@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Book</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="${book.title}">Book Title</h1>
+    <p><strong>Author:</strong> <span th:text="${book.author}">Author</span></p>
+    <p><strong>Price:</strong> <span th:text="${book.price}">Price</span></p>
+    <p><strong>Stock:</strong> <span th:text="${book.stock}">Stock</span></p>
+    <p><strong>Genre:</strong> <span th:text="${book.genre.name}">Genre</span></p>
+
+    <h2>Reviews</h2>
+    <table>
+        <tr>
+            <th>Reviewer</th>
+            <th>Rating</th>
+            <th>Comment</th>
+        </tr>
+        <tr th:each="review : ${reviews}">
+            <td th:text="${review.user.name}">Reviewer</td>
+            <td th:text="${review.rating}">Rating</td>
+            <td th:text="${review.comment}">Comment</td>
+        </tr>
+    </table>
+
+    <a class="back-link" href="/user/home">Back to Books</a>
+
+    <div th:if="${hasOrdered}">
+        <a th:href="@{/addReview(bookId=${book.bookId})}" class="btn btn-primary">Add Review</a>
+    </div>
+    <div th:if="${!hasOrdered}">
+        <button class="btn btn-primary" disabled>Add Review</button>
+        <p>You can only review books you've ordered.</p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order Details</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Order Details</h1>
+    <a class="back-link" href="/admin/orders">Back to Orders</a>
+    <table>
+        <thead>
+        <tr>
+            <th>Book Title</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${order.items}">
+            <td th:text="${item.book.title}">Book Title</td>
+            <td th:text="${item.quantity}">Quantity</td>
+            <td th:text="${item.price}">Price</td>
+        </tr>
+        </tbody>
+    </table>
+    <p>Status: <span th:text="${order.status}">Order Status</span></p>
+    <div th:if="${order.status == 'Completed'}">
+        <form th:action="@{/admin/orders/{id}/cancel(id=${order.orderId})}" method="post">
+            <input type="submit" value="Cancel Order">
+        </form>
+    </div>
+</div>
+</body>
+</html>

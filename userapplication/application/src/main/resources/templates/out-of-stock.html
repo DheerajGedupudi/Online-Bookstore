@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Out of Stock</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Order Error</h1>
+    <p th:text="${errorMessage}">Error message goes here</p>
+    <a href="/" class="btn btn-primary">Back to Home</a>
+</div>
+</body>
+</html>
